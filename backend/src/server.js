@@ -9,6 +9,7 @@ import { inngest , functions } from "./lib/inngest.js";
 import { clerkMiddleware } from '@clerk/express';
 
 import chatRoutes from "./routes/chatRoutes.js";
+import sessionRoutes from "./routes/sessionRoutes.js";
 
 const app = express();
 const __dirname = path.resolve();
@@ -19,7 +20,8 @@ app.use(express.json());
 app.use(cors({origin:ENV.CLIENT_URL,credentials:true}));
 
 app.use("/api/inngest",serve({client: inngest,functions}));
-app.use("/api/chat",chatRoutes);
+app.use("/api/chat",chatRoutes);// for chats
+app.use("/api/session",sessionRoutes);//for video
 app.use(clerkMiddleware());// this add auth field to request object : req.auth()
 
 app.get("/health",(req,res)=>{

@@ -10,7 +10,7 @@ async(req,res,next)=>{
         if(!clerkId){
             return res.status(401).json({msg:"Unauthorized invalid Token"})
         }
-        //find user in db by clerkid
+        //find user in db by clerkid this from where we are setting up value for user 
         const user = await User.findOne({clerkId});
         if(!user){
             return res.status(404).json({msg:"User not Found"})
