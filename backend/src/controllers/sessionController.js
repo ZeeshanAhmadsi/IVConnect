@@ -1,6 +1,11 @@
 import { chatClient, streamClient } from "../lib/stream.js";
 import Session from "../models/Session.js";
 
+/**
+ * Create a new session for a problem and difficulty, initialize its Stream video call and chat channel, and respond with the created session.
+ *
+ * Validates that `problem` and `difficulty` are provided in `req.body`. Uses `req.user` to set the session host and the chat/video creator, generates a unique callId, persists the Session, creates or retrieves the Stream video call with metadata, and creates a messaging channel with the creator as an initial member. Responds with 201 and the created session on success, 400 if required inputs are missing, and 500 on unexpected errors.
+ */
 export async function createSession(req,res){
     try{
         const {problem,difficulty} = req.body;
@@ -48,6 +53,11 @@ export async function createSession(req,res){
 
 
 
+/**
+ * Retrieve up to 20 most recently created sessions with status "active" and send them in the response.
+ *
+ * Responds with a JSON object containing `sessions` on success; logs the error and responds with a 500 error on failure.
+ */
 export async function getActiveSessions(req,res){
     try{
         const sessions = await Session.find({status:"active"}).
@@ -63,6 +73,12 @@ export async function getActiveSessions(req,res){
 }
 
 
+/**
+ * Retrieve the requesting user's most recent completed sessions and return them in the response.
+ *
+ * Responds with status 200 and a JSON object `{ sessions }` containing up to 20 completed sessions
+ * where the user is the host or participant, sorted by creation time descending.
+ */
 export async function getMyRecentSessions(req,res){
     try{
         const userId = req.user._id;
@@ -83,6 +99,14 @@ export async function getMyRecentSessions(req,res){
 }
 
 
+/**
+ * Retrieve a session by its ID and return it with populated host and participant fields.
+ *
+ * Searches for a Session document matching req.params.id, populates the host and participant with
+ * name, email, profileImage, and clerkId, then sends the session in the response body.
+ * Responds with 200 and the session when found, 404 if no session exists with that ID, and 500
+ * for internal server errors.
+ */
 export async function getSessionById(req,res){
     try{
         const {id} = req.params;
@@ -103,6 +127,11 @@ export async function getSessionById(req,res){
 }
 
 
+/**
+ * Add the requesting user as the participant of a session and add their clerk ID to the session's chat channel.
+ * @param {object} req - Express request; expects `req.params.id` (session ID) and `req.user` with `_id` (user ID) and `clerkId`.
+ * @param {object} res - Express response used to send HTTP status and JSON payloads.
+ */
 export async function joinSession(req,res){
     try{
         //check if the session is already
@@ -133,6 +162,11 @@ export async function joinSession(req,res){
 }
 
 
+/**
+ * End a host's active session and clean up its streaming and chat resources.
+ *
+ * Updates the session's status to "completed", persists the change, deletes the associated Stream video call and chat channel, and sends an HTTP response. Responds with 404 if the session doesn't exist, 403 if the requester is not the host, and 400 if the session is already completed.
+ */
 export async function endSession(req,res){
     try{
         const {id} =  req.params;
