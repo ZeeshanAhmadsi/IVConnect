@@ -52,7 +52,7 @@ export async function getActiveSessions(req,res){
     try{
         const sessions = await Session.find({status:"active"}).
         populate("host","name profileImage email clerkId").
-        sort({createdAt:-1}).
+        sort({created_At:-1}).
         limit(20);
 
         res.status(200).json({sessions});
@@ -115,7 +115,7 @@ export async function joinSession(req,res){
         if(!session) return res.status(404).json({msg:"Session not found"});
 
         //check if the session is already
-        if(session.participant) return res.status(404).json({msg:"Session is Full"});
+        if(session.participant) return res.status(400).json({msg:"Session is Full"});
 
         session.participant = userId;
         await session.save();
@@ -155,8 +155,6 @@ export async function endSession(req,res){
         session.status = "completed";
         await session.save();
 
-        res.status(200).json({session,msg:"Session ended successfully"});
-
         //delete stream video call
         const call = streamClient.video.call("default",session.callId);
         await call.delete({hard:true});
@@ -164,6 +162,7 @@ export async function endSession(req,res){
         //delete stream chat channel
         const channel = chatClient.channel("messaging",session.callId);
         await channel.delete();
+        res.status(200).json({session,msg:"Session ended successfully"});
 
     }catch(error){
         console.log("Error in endSession Controller",error.message);
