@@ -1,5 +1,18 @@
 import { getDifficultyBadgeClass } from "../lib/utils";
 
+/**
+ * Render a detailed problem view with header, difficulty badge, selector, description, examples, and constraints.
+ *
+ * @param {Object} props
+ * @param {Object} props.problem - Problem data: { title, difficulty, category, description, examples, constraints }.
+ *   description: { text: string, notes: string[] }.
+ *   examples: Array<{ input: string, output: string, explanation?: string }>.
+ *   constraints: string[].
+ * @param {string|number} props.currProblemID - Currently selected problem ID used by the selector.
+ * @param {(id: string|number) => void} props.onProblemChange - Callback invoked with the newly selected problem ID.
+ * @param {Array<{ id: string|number, title: string, difficulty: string }>} props.allProblems - List of problems to populate the selector.
+ * @returns {import('react').ReactElement} A React element representing the problem detail pane.
+ */
 function ProblemDescription({
   problem,
   currProblemID,

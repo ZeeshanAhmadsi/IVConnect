@@ -11,6 +11,12 @@ import toast from "react-hot-toast";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import confetti from "canvas-confetti";
 
+/**
+ * Render the problem-solving page with a navigable problem description, language-aware code editor, and execution output panels.
+ *
+ * The component synchronizes the current problem from the URL, loads language-specific starter code, runs submitted code via the execution service, compares output against expected results, and provides visual and toast feedback for success or failure.
+ *
+ * @returns {JSX.Element} The page element containing the navbar, a left problem description panel, and a right split panel with the code editor and output.
 function ProblemPage() {
   const { id } = useParams();
   const navigate = useNavigate();
