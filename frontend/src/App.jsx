@@ -6,6 +6,16 @@ import ProblemPage from './Pages/problemPage';
 import {Toaster} from 'react-hot-toast';
 import DashboardPage from './Pages/DashboardPage';
 
+/**
+ * Render the application's top-level routes and toast container based on authentication state.
+ *
+ * While authentication is loading, returns `null` to prevent UI flicker. Once loaded,
+ * renders route definitions for "/", "/dashboard", "/problems", and "/problem/:id",
+ * conditionally showing pages or redirecting based on whether the user is signed in,
+ * and includes a Toaster with a 3000ms duration.
+ *
+ * @returns {JSX.Element | null} A React element tree containing the Routes and Toaster, or `null` while auth is loading.
+ */
 function App() {
   const{isSignedIn,isLoaded} = useUser();
 
