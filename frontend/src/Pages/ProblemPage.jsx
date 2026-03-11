@@ -77,7 +77,7 @@ function ProblemPage() {
     const normalizeActualOutput = normalizeOutput(actualOutput);
     const normalizeExpectedOutput = normalizeOutput(expectedOutput);
 
-    return normalizeActualOutput == normalizeExpectedOutput;
+    return normalizeActualOutput === normalizeExpectedOutput;
   };
 
   const handleRunCode = async()=>{

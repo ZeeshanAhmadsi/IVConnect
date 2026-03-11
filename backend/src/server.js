@@ -22,7 +22,7 @@ app.use(clerkMiddleware());// this add auth field to request object : req.auth()
 
 app.use("/api/inngest",serve({client: inngest,functions}));
 app.use("/api/chat",chatRoutes);// for chats
-app.use("/api/session",sessionRoutes);//for video
+app.use("/api/sessions",sessionRoutes);//for video
 
 
 app.get("/health",(req,res)=>{
