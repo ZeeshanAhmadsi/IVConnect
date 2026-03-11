@@ -11,6 +11,13 @@ import toast from "react-hot-toast";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import confetti from "canvas-confetti";
 
+/**
+ * Render the problem page containing a resizable layout with a problem description on the left and a code editor plus output panels on the right.
+ *
+ * The component manages problem selection, language selection, editor code, code execution, and test-result handling (including visual confetti and toast notifications on success or failure).
+ *
+ * @returns {JSX.Element} The page's React element with Navbar, a left Panel for ProblemDescription, and a right PanelGroup for CodeEditorPanel and OutputPanel.
+ */
 function ProblemPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -77,7 +84,7 @@ function ProblemPage() {
     const normalizeActualOutput = normalizeOutput(actualOutput);
     const normalizeExpectedOutput = normalizeOutput(expectedOutput);
 
-    return normalizeActualOutput == normalizeExpectedOutput;
+    return normalizeActualOutput === normalizeExpectedOutput;
   };
 
   const handleRunCode = async()=>{

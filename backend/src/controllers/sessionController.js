@@ -48,10 +48,18 @@ export async function createSession(req,res){
 
 
 
+/**
+ * Retrieve active sessions and return up to 20 most-recent sessions with host and participant details.
+ *
+ * Sessions are sorted by creation time in descending order and limited to 20 results.
+ *
+ * @returns {Object} JSON object with a `sessions` array of active Session documents populated with host and participant fields (`name`, `profileImage`, `email`, `clerkId`).
+ */
 export async function getActiveSessions(req,res){
     try{
         const sessions = await Session.find({status:"active"}).
         populate("host","name profileImage email clerkId").
+        populate("participant","name profileImage email clerkId").
         sort({created_At:-1}).
         limit(20);
 
