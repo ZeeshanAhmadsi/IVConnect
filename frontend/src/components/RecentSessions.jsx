@@ -2,6 +2,13 @@ import { Code2, Clock, Users, Trophy, Loader } from "lucide-react";
 import { getDifficultyBadgeClass } from "../lib/utils";
 import { formatDistanceToNow } from "date-fns";
 
+/**
+ * Render a responsive card displaying past coding sessions.
+ * @param {Object} props - The component properties.
+ * @param {Array} props.sessions - The sessions to display.
+ * @param {boolean} props.isLoading - Whether session data is loading.
+ * @returns {JSX.Element} The rendered sessions card.
+ */
 function RecentSessions({ sessions, isLoading }) {
   return (
     <div className="card bg-base-100 border-2 border-accent/20 hover:border-accent/30 mt-8">

@@ -7,6 +7,9 @@ import {Toaster} from 'react-hot-toast';
 import DashboardPage from './Pages/DashboardPage';
 import SessionPage from './components/SessionPage';
 
+/**
+ * Renders the application routes and toast notifications based on authentication state.
+ */
 function App() {
   const{isSignedIn,isLoaded} = useUser();
 

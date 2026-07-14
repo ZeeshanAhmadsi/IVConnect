@@ -20,6 +20,12 @@ import {
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import  "stream-chat-react/dist/css/v2/index.css";
 
+/**
+ * Render the video call interface with participant information, call controls, and optional session chat.
+ * @param {object} chatClient - The chat client used to connect the session chat.
+ * @param {object} channel - The chat channel displayed in the session chat.
+ * @returns {JSX.Element} The video call interface.
+ */
 function VideoCallUI({ chatClient, channel }) {
   const navigate = useNavigate();
   const { useCallCallingState, useParticipantCount } = useCallStateHooks();

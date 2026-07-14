@@ -4,6 +4,14 @@ import { StreamChat } from "stream-chat";
 import { initializeStreamClient,disconnectStreamClient } from "../lib/stream";
 import { sessionApi } from "../api/sessions";
 
+/**
+ * Initializes and manages Stream video calling and in-call messaging for a session.
+ * @param {Object|null} session - The session containing the Stream call identifier.
+ * @param {boolean} loadingSession - Whether session data is still loading.
+ * @param {boolean} isHost - Whether the current user is the session host.
+ * @param {boolean} isParticipant - Whether the current user is a session participant.
+ * @returns {Object} The Stream clients, active call, watched channel, and initialization status.
+ */
 function useStreamClient(session, loadingSession, isHost, isParticipant) {
 const [streamClient,setStreamClient] = useState(null);
 const [call,setCall] = useState(null);

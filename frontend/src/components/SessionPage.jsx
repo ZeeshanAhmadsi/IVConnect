@@ -18,6 +18,10 @@ import useStreamClient from "../hooks/useStreamClient";
 import { StreamCall, StreamVideo } from "@stream-io/video-react-sdk";
 import VideoCallUI from "../components/VideoCallUI"
 
+/**
+ * Renders the collaborative coding session page with problem details, code execution, video calling, and chat.
+ * @return {JSX.Element} The session page interface.
+ */
 function SessionPage() {
   const navigate = useNavigate();
   const { id } = useParams();
