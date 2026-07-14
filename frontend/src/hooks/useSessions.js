@@ -5,7 +5,7 @@ import { sessionApi } from "../api/sessions";
 export const useCreateSessions = ()=>{
 const result = useMutation({
     mutationKey: ["createSession"],
-    mutationFn: (data) => sessionApi.createSession(data),
+    mutationFn: sessionApi.createSession,
     onSuccess: () => toast.success("Session Created Successfully"),
     onError: (error) => toast.error(error.response?.data?.message || "Failed to Create a Room"),
 });
@@ -16,7 +16,7 @@ return result;
 export const useActiveSessions = ()=>{
 const result = useQuery({
     queryKey: ["activeSessions"],
-    queryFn: () => sessionApi.getActiveSessions(),
+    queryFn: sessionApi.getActiveSessions,
 });
 
 return result;
@@ -26,7 +26,7 @@ return result;
 export const useMyRecentSessions = ()=>{
     const result = useQuery({
     queryKey: ["myRecentSessions"],
-    queryFn: () => sessionApi.getMyRecentSessions(),
+    queryFn: sessionApi.getMyRecentSessions,
 });
 
 return result;
@@ -46,23 +46,23 @@ return result;
 
 
 
-export const useJoinSession = (id)=>{
+export const useJoinSession = ()=>{
 const result = useMutation({
     mutationKey: ["joinSession"],
-    mutationFn: () => sessionApi.joinSession(id),
+    mutationFn: sessionApi.joinSession,
     onSuccess: () => toast.success("Joined Session Successfully"),
-    onError: (error) => toast.error(error.response?.data?.message || "Failed to Join the Room"),
+    onError: (error) => toast.error(error.response?.data?.message || "Failed to Join Room"),
  });
  return result;
 }
 
 
-export const useEndSession = (id)=>{
+export const useEndSession = ()=>{
 const result = useMutation({
     mutationKey:["endSession"],
-    mutationFn: () => sessionApi.endSession(id),
+    mutationFn: sessionApi.endSession,
     onSuccess: () => toast.success("Session ended Successfully"),
-    onError: (error) => toast.error(error.response?.data?.message || "Failed to end a Room"),
+    onError: (error) => toast.error(error.response?.data?.message || "Failed to end Room"),
 });
 return result;
 }
