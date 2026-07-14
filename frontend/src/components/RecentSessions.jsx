@@ -2,12 +2,19 @@ import { Code2, Clock, Users, Trophy, Loader } from "lucide-react";
 import { getDifficultyBadgeClass } from "../lib/utils";
 import { formatDistanceToNow } from "date-fns";
 
+/**
+ * Render a responsive card displaying past coding sessions.
+ * @param {Object} props - The component properties.
+ * @param {Array} props.sessions - The sessions to display.
+ * @param {boolean} props.isLoading - Whether session data is loading.
+ * @returns {JSX.Element} The rendered sessions card.
+ */
 function RecentSessions({ sessions, isLoading }) {
   return (
     <div className="card bg-base-100 border-2 border-accent/20 hover:border-accent/30 mt-8">
       <div className="card-body">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-gradient-to-br from-accent to-secondary rounded-xl">
+          <div className="p-2 bg-gradient-to-br  from-emerald-500 to-emerald-700 rounded-xl">
             <Clock className="w-5 h-5 text-white" />
           </div>
           <h2 className="text-2xl font-black">Your Past Sessions</h2>
@@ -87,7 +94,7 @@ function RecentSessions({ sessions, isLoading }) {
             ))
           ) : (
             <div className="col-span-full text-center py-16">
-              <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-accent/20 to-secondary/20 rounded-3xl flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br  from-emerald-700 to-emerald-500 rounded-3xl flex items-center justify-center">
                 <Trophy className="w-10 h-10 text-accent/50" />
               </div>
               <p className="text-lg font-semibold opacity-70 mb-1">No sessions yet</p>
